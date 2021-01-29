@@ -36,7 +36,7 @@ public class BallManager : MonoBehaviour
             rb.AddForce(transform.up * 50);
     }
 
-    // Çarpışma Kontrolü
+    // Çarpışma kontrolünü sağlayan fonksiyon
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "LoseBox")

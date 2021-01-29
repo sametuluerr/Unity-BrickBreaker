@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PaddleManager : MonoBehaviour
 {
-    private float speed = 9f;
+    private float paddleSpeed = 9f;
     private float input;
 
     void Update()
@@ -14,6 +14,7 @@ public class PaddleManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GetComponent<Rigidbody2D>().velocity = Vector2.right * input * speed;
+        // Pedalın hızını ayarla
+        GetComponent<Rigidbody2D>().velocity = Vector2.right * input * paddleSpeed;
     }
 }

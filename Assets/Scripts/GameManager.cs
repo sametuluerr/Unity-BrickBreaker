@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public static bool isDead = false;
     public static int gameScore = 0;
     public static int brokenBrickCount;
-    public int startCount;
+    public int startBrickCount;
 
     public Text endScreen;
     public Text brickCount;
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         gameStarted = false;
         startGame = false;
 
-        startCount = blueblocks.Length + orangeblocks.Length + greenblocks.Length;
+        startBrickCount = blueblocks.Length + orangeblocks.Length + greenblocks.Length;
     }
 
     void Update()
@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
         WriteBrickInfo();
     }
 
+    // Oyun başlamadan topun konumunu ayarlayan ve oyunu başlatan fonksiyon
     void PreStartGame()
     {
         Vector3 paddlePos = paddle.gameObject.transform.position;
@@ -77,6 +78,7 @@ public class GameManager : MonoBehaviour
             initialBall.transform.position = ballPos;
     }
 
+    // Seviye kontrolünü yapan ve oyunu kazandınız ekranını gösteren fonksiyon
     void Winner()
     {
         blueblocks = GameObject.FindGameObjectsWithTag("BlueBlock");
@@ -102,6 +104,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Oyunu kaybettiniz ekranını gösteren fonksiyon
     void Loser()
     {
         if (isDead == true)
@@ -125,12 +128,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Tuğla ve skor hakkındaki bilgileri ekrana yazdıran fonksiyon
     void WriteBrickInfo()
     {
-        brickCount.text = "Hedef: " + brokenBrickCount + "/" + startCount;
+        brickCount.text = "Hedef: " + brokenBrickCount + "/" + startBrickCount;
         scoreText.text = "Skor: " + gameScore;
     }
 
+    // Başlangıçta topun oluşturulmasını sağlayan fonksiyon
     void InitializeBall()
     {
         Vector3 paddlePos = paddle.gameObject.transform.position;
@@ -138,6 +143,7 @@ public class GameManager : MonoBehaviour
         initialBall = Instantiate(ballprefab, ballPos, Quaternion.identity);
     }
 
+    // Oyunun ilk sahnesinin yüklenmesini sağlayan fonksiyon
     public void LoadScene()
     {
         gameStarted = false;
@@ -145,11 +151,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Level 1");
     }
 
+    // Ekrana gönderilen mesajı toast mesajı şeklinde yazan fonksiyon
     public void showToast(string text, int duration)
     {
         StartCoroutine(showToastCOR(text, duration));
     }
 
+    // Ekrana gönderilen mesajı toast mesajı şeklinde yazan yazının ayarlarını yapan fonksiyon
     private IEnumerator showToastCOR(string text, int duration)
     {
         Color orginalColor = ToastText.color;
@@ -176,6 +184,7 @@ public class GameManager : MonoBehaviour
         ToastText.color = orginalColor;
     }
 
+    //  Ekrana gönderilen mesajı toast mesajı şeklinde yazan yazının ekranda kalma süresini ayarlayan fonksiyon
     IEnumerator fadeInAndOut(Text targetText, bool fadeIn, float duration)
     {
         //fadein mi değil mi?
